@@ -30,8 +30,16 @@ int main() {
             villagers[name] = make_tuple(friendship, species, catchphrase);
             cout << name << " added. \n";
         } else if (choice == 2){
-
+            string name;
+            cout << "Enter name to delete: ";
+            cin >> name;
+            if (villagers.erase(name)){
+                cout << name << "deleted\n";
+            } else {
+                cout << name << "doesn't exist\n";
+            }
         } else if (choice == 3 || choice == 4){
+            string name;
 
         } else if (choice == 5){
 
