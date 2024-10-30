@@ -5,20 +5,20 @@
 #include <string>
 using namespace std;
 
+void displbayVillagers(){
+    cout << "Villager info: \n";
+    for (const auto& villager: villagers){
+        cout << villager.first << " "
+            << get <0>(villager.second) << ", "
+            << get <1>(villager.second) << ", "
+            << get <2>(villager.second) << "] \n";
+        }
+}
+
 int main() {
     // declarations
-    map<string, vector<string>> villagerColors;
+    map<string, tuple< int, string, string >> villagers;
     int choice;
-
-    void displbayVillagers(){
-        cout << "Villager info: \n";
-        for (const auto& villager: villagers){
-            cout << villager.first << " "
-                << get <0>(villager.second) << ", "
-                << get <1>(villager.second) << ", "
-                << get <2>(villager.second) << "] \n";
-        }
-    }
 
     do{
         cout << "Menu: \n" << "1. Add Villager\n" << "2. Delete Villager\n" << "3. Increase Friendship\n"
@@ -52,6 +52,19 @@ int main() {
             }
         } else if (choice == 3 || choice == 4){
             string name;
+            cout << "Enter name: ";
+            cin >> name;
+            auto it = villagers.find(name);
+
+            if(it != villagers.end()){
+                int& friendship = get<0>(it->second);
+                int delta (choice == 3) ? 1 :-1;
+
+                if ((delta == 1 && friendship < 10) || (delta == -1 && friendship > 0)){
+                    friendship += delta;
+                    cout << "Friendship is" << (delta == 1 ? "increased" : "decreased\n");
+                }
+            }
 
         } else if (choice == 5){
             string name;
