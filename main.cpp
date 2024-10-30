@@ -1,12 +1,21 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <tuple>
+#include <string>
 using namespace std;
 
 int main() {
     // declarations
     map<string, vector<string>> villagerColors;
     int choice;
+
+    void displayVillagers(){
+        cout << "Villager info: \n";
+        for (const auto& villager: villagers){
+            cout << villager.first << ""
+        }
+    }
 
     do{
         cout << "Menu: \n" << "1. Add Villager\n" << "2. Delete Villager\n" << "3. Increase Friendship\n"
