@@ -49,13 +49,20 @@ int main() {
             if (villagers.count(name) > 0){
                 cout << name << "["
                     << get<0>(villagers[name]) << ","
-                    << get<1>(villagers[name]) <<
+                    << get<1>(villagers[name]) <<  ","
+                    << get<2>(villagers[name]) << "]\n";
+            } else {
+                cout << name << "does not exist";
             }
         } else if (choice == 6){
-
+            cout << "Exit\n";
         } else {
+            cout << "Invalid\n";
+        }
 
-        } while ();
+        displayVillagers(villagers);
+    
+    }while (choice != 6);
 
         return 0;
     }
