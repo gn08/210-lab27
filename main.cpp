@@ -42,7 +42,15 @@ int main() {
             string name;
 
         } else if (choice == 5){
-
+            string name;
+            cout << "Name to search: ";
+            cin >> name;
+            auto it = villagers.find(name);
+            if (villagers.count(name) > 0){
+                cout << name << "["
+                    << get<0>(villagers[name]) << ","
+                    << get<1>(villagers[name]) <<
+            }
         } else if (choice == 6){
 
         } else {
