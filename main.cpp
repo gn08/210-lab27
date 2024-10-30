@@ -10,10 +10,13 @@ int main() {
     map<string, vector<string>> villagerColors;
     int choice;
 
-    void displayVillagers(){
+    void displbayVillagers(){
         cout << "Villager info: \n";
         for (const auto& villager: villagers){
-            cout << villager.first << ""
+            cout << villager.first << " "
+                << get <0>(villager.second) << ", "
+                << get <1>(villager.second) << ", "
+                << get <2>(villager.second) << "] \n";
         }
     }
 
