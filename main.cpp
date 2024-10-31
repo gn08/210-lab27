@@ -5,10 +5,10 @@
 #include <string>
 using namespace std;
 
-void displbayVillagers(){
+void displayVillagers(const map<string, tuple<int, string, string>>& villagers){
     cout << "Villager info: \n";
     for (const auto& villager: villagers){
-        cout << villager.first << " "
+        cout << villager.first << " ["
             << get <0>(villager.second) << ", "
             << get <1>(villager.second) << ", "
             << get <2>(villager.second) << "] \n";
@@ -19,10 +19,22 @@ int main() {
     // declarations
     map<string, tuple< int, string, string >> villagers;
     int choice;
+    map<string, vector<string>> villagerColors;
+
+    // insert elements into the map
+    // note how the right-hand side of the assignment are the vector elements
+    villagerColors["Audie"] = {"Orange", "Yellow", "Red"};
+    villagerColors["Raymond"] = {"Black", "Gray", "White"};
+    villagerColors.insert({"Marshal", {"Blue", "White", "Black"}});
 
     do{
-        cout << "Menu: \n" << "1. Add Villager\n" << "2. Delete Villager\n" << "3. Increase Friendship\n"
-            << "4. Decrease Friendship\n" << "5. Search for Villager\n" << "6. Exit\n";
+        cout << "Menu: \n"
+            << "1. Add Villager\n"
+            << "2. Delete Villager\n" 
+            << "3. Increase Friendship\n"
+            << "4. Decrease Friendship\n" 
+            << "5. Search for Villager\n" 
+            << "6. Exit\n";
         cin >> choice;
 
         if (choice == 1){
@@ -58,11 +70,13 @@ int main() {
 
             if(it != villagers.end()){
                 int& friendship = get<0>(it->second);
-                int delta (choice == 3) ? 1 :-1;
+                int delta = (choice = 3) ? 1 :-1;
 
                 if ((delta == 1 && friendship < 10) || (delta == -1 && friendship > 0)){
                     friendship += delta;
                     cout << "Friendship is" << (delta == 1 ? "increased" : "decreased\n");
+                } else {
+                    cout << name << "does not exist\n";
                 }
             }
 
@@ -87,16 +101,9 @@ int main() {
 
         displayVillagers(villagers);
     
-    }while (choice != 6);
+    } while (choice != 6);
 
         return 0;
-    }
-
-    // insert elements into the map
-    // note how the right-hand side of the assignment are the vector elements
-    villagerColors["Audie"] = {"Orange", "Yellow", "Red"};
-    villagerColors["Raymond"] = {"Black", "Gray", "White"};
-    villagerColors.insert({"Marshal", {"Blue", "White", "Black"}});
 
     // access the map using a range-based for loop
     cout << "Villagers and their favorite colors (range-based for loop):" << endl;
@@ -109,8 +116,7 @@ int main() {
 
     // access the map using iterators
     cout << "\nVillagers and their favorite colors (iterators):" << endl;
-    for (map<string, vector<string>>::iterator it = villagerColors.begin(); 
-                                               it != villagerColors.end(); ++it) {
+    for (auto it= villagerColors.begin(); it != villagerColors.end(); ++it) {
         cout << it->first << ": ";
         for (auto color : it->second) {
             cout << color << " ";
@@ -130,8 +136,9 @@ int main() {
         for (auto color : it->second)  // range loop to traverse the value/vector
             cout << color << " ";
         cout << endl;
-    } else
+    } else{
         cout << endl << searchKey << " not found." << endl;
+    }
 
     // report size, clear, report size again to confirm map operations
     cout << "\nSize before clear: " << villagerColors.size() << endl;
