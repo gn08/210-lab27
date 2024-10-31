@@ -5,6 +5,9 @@
 #include <string>
 using namespace std;
 
+//displayVillagers()display villagers and info
+//arguements: const map<string, tuple<int, string, string>>& villagers- villager names and info
+//returns: nothing
 void displayVillagers(const map<string, tuple<int, string, string>>& villagers){
     cout << "Villager info: \n";
     for (const auto& villager: villagers){
@@ -28,6 +31,7 @@ int main() {
     villagerColors.insert({"Marshal", {"Blue", "White", "Black"}});
 
     do{
+        //give user the options to select
         cout << "Menu: \n"
             << "1. Add Villager\n"
             << "2. Delete Villager\n" 
@@ -35,8 +39,10 @@ int main() {
             << "4. Decrease Friendship\n" 
             << "5. Search for Villager\n" 
             << "6. Exit\n";
+            //take in their option for choice
         cin >> choice;
 
+// if this selected it will add villager
         if (choice == 1){
             string name;
             string species;
@@ -53,6 +59,7 @@ int main() {
             getline(cin, catchphrase);
             villagers[name] = make_tuple(friendship, species, catchphrase);
             cout << name << " added. \n";
+        //if this selected it will remove villager
         } else if (choice == 2){
             string name;
             cout << "Enter name to delete: ";
@@ -62,6 +69,7 @@ int main() {
             } else {
                 cout << name << "doesn't exist\n";
             }
+        // change friendship level
         } else if (choice == 3 || choice == 4){
             string name;
             cout << "Enter name: ";
@@ -79,7 +87,7 @@ int main() {
                     cout << name << "does not exist\n";
                 }
             }
-
+//search for villager
         } else if (choice == 5){
             string name;
             cout << "Name to search: ";
@@ -93,6 +101,7 @@ int main() {
             } else {
                 cout << name << "does not exist";
             }
+        //exit
         } else if (choice == 6){
             cout << "Exit\n";
         } else {
@@ -100,7 +109,7 @@ int main() {
         }
 
         displayVillagers(villagers);
-    
+    //until exit
     } while (choice != 6);
 
         return 0;
